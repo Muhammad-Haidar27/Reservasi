@@ -63,6 +63,97 @@
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
         }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(100px) scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+        
+        @keyframes checkmark {
+            0% { 
+                stroke-dashoffset: 100; 
+            }
+            100% { 
+                stroke-dashoffset: 0; 
+            }
+        }
+        
+        @keyframes scaleUp {
+            0%, 100% { 
+                transform: scale(1); 
+            }
+            50% { 
+                transform: scale(1.1); 
+            }
+        }
+        
+        .animate-slideUp {
+            animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: checkmark 0.6s ease-in-out 0.2s forwards;
+        }
+        
+        .checkmark-check {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: checkmark 0.4s ease-in-out 0.6s forwards;
+        }
+        
+        .success-icon {
+            animation: scaleUp 0.6s ease-in-out 0.8s;
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Menu card hover */
+        .menu-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 min-h-screen">
@@ -81,8 +172,16 @@
         <div class="relative z-10 py-12 px-4">
             <div class="max-w-6xl mx-auto">
                 
+                <!-- Navigation -->
+                <nav class="flex justify-center gap-8 mb-12 animate-fadeIn">
+                    <a href="#home" class="nav-link text-white font-light tracking-wide hover:text-orange-200 transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-white font-light tracking-wide hover:text-orange-200 transition-colors">About Us</a>
+                    <a href="#menu" class="nav-link text-white font-light tracking-wide hover:text-orange-200 transition-colors">Menu</a>
+                    <a href="#reservation" class="nav-link text-white font-light tracking-wide hover:text-orange-200 transition-colors">Réservation</a>
+                </nav>
+                
                 <!-- Header with Logo -->
-                <div class="text-center mb-12 animate-fadeIn">
+                <div id="home" class="text-center mb-12 animate-fadeIn">
                     <!-- Elegant Logo -->
                     <div class="inline-block mb-6">
                         <div class="relative">
@@ -125,6 +224,170 @@
                     </div>
                 </div>
 
+                <!-- About Us Section -->
+                <div id="about" class="mb-20 scroll-mt-20">
+                    <div class="glass-effect rounded-3xl shadow-2xl p-8 md:p-12 border border-white/20 animate-scaleIn">
+                        <div class="text-center mb-8">
+                            <h2 class="font-cormorant text-4xl md:text-5xl font-semibold text-gray-800 mb-3">À Propos de Nous</h2>
+                            <div class="w-24 h-px bg-orange-600 mx-auto mb-4"></div>
+                            <p class="text-gray-600 font-light italic">Notre Histoire</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" 
+                                     alt="Restaurant Interior" 
+                                     class="rounded-2xl shadow-lg w-full h-64 object-cover">
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-gray-700 leading-relaxed">
+                                    Sejak 1995, <span class="font-semibold text-orange-600">La Maison</span> telah menjadi destinasi kuliner terbaik di Jakarta. 
+                                    Kami menghadirkan pengalaman fine dining dengan sentuhan Prancis yang autentik.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Setiap hidangan kami dibuat dengan bahan-bahan premium pilihan dan disajikan dengan penuh perhatian terhadap detail. 
+                                    Chef kami yang berpengalaman memadukan teknik klasik dengan inovasi modern.
+                                </p>
+                                <div class="grid grid-cols-3 gap-4 pt-4">
+                                    <div class="text-center">
+                                        <p class="font-cormorant text-3xl font-semibold text-orange-600">28+</p>
+                                        <p class="text-sm text-gray-600">Tahun</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-cormorant text-3xl font-semibold text-orange-600">50+</p>
+                                        <p class="text-sm text-gray-600">Menu</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-cormorant text-3xl font-semibold text-orange-600">10K+</p>
+                                        <p class="text-sm text-gray-600">Pelanggan</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Section -->
+                <div id="menu" class="mb-20 scroll-mt-20">
+                    <div class="glass-effect rounded-3xl shadow-2xl p-8 md:p-12 border border-white/20 animate-scaleIn">
+                        <div class="text-center mb-10">
+                            <h2 class="font-cormorant text-4xl md:text-5xl font-semibold text-gray-800 mb-3">Notre Menu</h2>
+                            <div class="w-24 h-px bg-orange-600 mx-auto mb-4"></div>
+                            <p class="text-gray-600 font-light italic">Signature Dishes</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <!-- Menu Item 1 -->
+                            <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80" 
+                                     alt="Salad" 
+                                     class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h3 class="font-cormorant text-2xl font-semibold text-gray-800 mb-2">Salade Niçoise</h3>
+                                    <p class="text-gray-600 text-sm mb-3 font-light">
+                                        Salad segar dengan tuna, telur, tomat, dan olive
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-orange-600 font-semibold text-lg">Rp 125.000</span>
+                                        <span class="text-yellow-500 text-sm">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Menu Item 2 -->
+                            <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" 
+                                     alt="Pizza" 
+                                     class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h3 class="font-cormorant text-2xl font-semibold text-gray-800 mb-2">Pizza Margherita</h3>
+                                    <p class="text-gray-600 text-sm mb-3 font-light">
+                                        Pizza klasik dengan mozzarella, basil, dan saus tomat
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-orange-600 font-semibold text-lg">Rp 145.000</span>
+                                        <span class="text-yellow-500 text-sm">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Menu Item 3 -->
+                            <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80" 
+                                     alt="Pancakes" 
+                                     class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h3 class="font-cormorant text-2xl font-semibold text-gray-800 mb-2">Pancakes Délicieux</h3>
+                                    <p class="text-gray-600 text-sm mb-3 font-light">
+                                        Pancake lembut dengan sirup maple dan berry segar
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-orange-600 font-semibold text-lg">Rp 95.000</span>
+                                        <span class="text-yellow-500 text-sm">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Menu Item 4 -->
+                            <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&q=80" 
+                                     alt="Steak" 
+                                     class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h3 class="font-cormorant text-2xl font-semibold text-gray-800 mb-2">Beef Tenderloin</h3>
+                                    <p class="text-gray-600 text-sm mb-3 font-light">
+                                        Tenderloin premium dengan saus lada hitam
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-orange-600 font-semibold text-lg">Rp 285.000</span>
+                                        <span class="text-yellow-500 text-sm">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Menu Item 5 -->
+                            <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=80" 
+                                     alt="Pasta" 
+                                     class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h3 class="font-cormorant text-2xl font-semibold text-gray-800 mb-2">Pasta Carbonara</h3>
+                                    <p class="text-gray-600 text-sm mb-3 font-light">
+                                        Pasta dengan saus krim, bacon, dan parmesan
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-orange-600 font-semibold text-lg">Rp 135.000</span>
+                                        <span class="text-yellow-500 text-sm">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Menu Item 6 -->
+                            <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80" 
+                                     alt="Dessert" 
+                                     class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h3 class="font-cormorant text-2xl font-semibold text-gray-800 mb-2">Crème Brûlée</h3>
+                                    <p class="text-gray-600 text-sm mb-3 font-light">
+                                        Dessert klasik Prancis dengan karamel renyah
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-orange-600 font-semibold text-lg">Rp 75.000</span>
+                                        <span class="text-yellow-500 text-sm">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-8">
+                            <a href="#reservation" class="inline-block bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-light tracking-widest uppercase px-8 py-3 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg text-sm">
+                                Réserver Maintenant
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Food Gallery -->
                 <div class="grid grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto animate-fadeIn">
                     <div class="food-card rounded-2xl overflow-hidden shadow-xl">
@@ -144,7 +407,8 @@
                     </div>
                 </div>
 
-                <!-- Form Card -->
+                <!-- Reservation Form Section -->
+                <div id="reservation" class="scroll-mt-20">
                 <div class="max-w-2xl mx-auto">
                     <div class="glass-effect rounded-3xl shadow-2xl p-8 md:p-10 animate-scaleIn border border-white/20">
                         
@@ -287,7 +551,64 @@
             </form>
         </div>
 
-        <!-- Success Message -->
+        <!-- Success Modal -->
+        <div id="successModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 animate-slideUp">
+                <!-- Success Icon -->
+                <div class="flex justify-center mb-6">
+                    <div class="relative success-icon">
+                        <svg class="w-24 h-24" viewBox="0 0 52 52">
+                            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" stroke="#10b981" stroke-width="2"/>
+                            <path class="checkmark-check" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" d="M14 27l7.5 7.5L38 18"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="text-center">
+                    <h3 class="font-cormorant text-3xl font-semibold text-gray-800 mb-3">Merci Beaucoup!</h3>
+                    <div class="w-20 h-px bg-orange-600 mx-auto mb-4"></div>
+                    <p class="text-gray-600 mb-2 font-light">Votre réservation a été confirmée</p>
+                    <p class="text-sm text-gray-500 font-light leading-relaxed">
+                        Kami akan menghubungi Anda segera untuk konfirmasi lebih lanjut. 
+                        Terima kasih telah memilih La Maison.
+                    </p>
+                    
+                    <!-- Reservation Details -->
+                    <div class="mt-6 bg-orange-50 rounded-xl p-4 text-left">
+                        <p class="text-xs text-gray-500 uppercase tracking-wider mb-2 font-medium">Detail Reservasi</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Nama:</span>
+                                <span class="font-medium text-gray-800" id="modal-nama"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Tanggal:</span>
+                                <span class="font-medium text-gray-800" id="modal-tanggal"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Waktu:</span>
+                                <span class="font-medium text-gray-800" id="modal-waktu"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Jumlah Tamu:</span>
+                                <span class="font-medium text-gray-800" id="modal-tamu"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Close Button -->
+                <button 
+                    onclick="closeSuccessModal()" 
+                    class="mt-6 w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-light tracking-widest uppercase py-3 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg text-sm"
+                >
+                    Fermer
+                </button>
+            </div>
+        </div>
+
+        <!-- Old Success Message (Hidden, kept for fallback) -->
         <div id="successMessage" class="hidden mt-8 glass-effect rounded-2xl p-6 animate-scaleIn border border-green-200 shadow-xl">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -320,6 +641,7 @@
                 </div>
             </div>
         </div>
+        </div>
 
         <!-- Footer -->
         <div class="text-center mt-12 text-white font-light">
@@ -350,6 +672,20 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
         const errorText = document.getElementById('errorText');
+        const successModal = document.getElementById('successModal');
+
+        // Close modal function
+        window.closeSuccessModal = function() {
+            successModal.classList.add('hidden');
+            form.reset();
+        }
+
+        // Close modal when clicking outside
+        successModal.addEventListener('click', function(e) {
+            if (e.target === successModal) {
+                closeSuccessModal();
+            }
+        });
 
         // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
@@ -451,6 +787,7 @@
             // Hide previous messages
             successMessage.classList.add('hidden');
             errorMessage.classList.add('hidden');
+            successModal.classList.add('hidden');
 
             // Validate form
             if (!validateForm()) {
@@ -482,17 +819,22 @@
                     body: JSON.stringify(formData)
                 });
 
-                // Show success message
-                successMessage.classList.remove('hidden');
-                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                // Simulate minimum loading time for better UX
+                await new Promise(resolve => setTimeout(resolve, 1500));
 
-                // Reset form
-                form.reset();
+                // Populate modal with reservation details
+                document.getElementById('modal-nama').textContent = formData.nama;
+                document.getElementById('modal-tanggal').textContent = new Date(formData.tanggal).toLocaleDateString('id-ID', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                document.getElementById('modal-waktu').textContent = formData.waktu;
+                document.getElementById('modal-tamu').textContent = formData.jumlahTamu + ' orang';
 
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                }, 5000);
+                // Show success modal
+                successModal.classList.remove('hidden');
 
             } catch (error) {
                 console.error('Error:', error);
