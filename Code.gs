@@ -1,84 +1,40 @@
 /**
- * Google Apps Script untuk Sistem Reservasi Restoran
- * File ini harus di-deploy sebagai Web App
+ * Google Apps Script - Toko Emas Aurum Gold
+ * Deploy sebagai Web App: Execute as Me, Access: Anyone
  */
 
 function doPost(e) {
   try {
-    // Parse data dari request
     const data = JSON.parse(e.postData.contents);
-    
-    // Validasi data
-    if (!data.nama || !data.telepon || !data.jumlahTamu || !data.tanggal || !data.waktu) {
-      return ContentService.createTextOutput(JSON.stringify({
-        status: 'error',
-        message: 'Data tidak lengkap'
-      })).setMimeType(ContentService.MimeType.JSON);
-    }
-    
-    // Buka spreadsheet aktif
+
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
-    // Hitung nomor urut
     const lastRow = sheet.getLastRow();
-    const no = lastRow > 0 ? lastRow : 1;
-    
-    // Timestamp
+    const no = lastRow < 1 ? 1 : lastRow;
     const timestamp = new Date();
-    
-    // Siapkan data sesuai urutan kolom spreadsheet
+
+    // Kolom: No | Nama | Nomor Telepon | Produk | Jumlah | Alamat | Catatan | Timestamp
     const rowData = [
-      no,                    // No
-      data.nama,             // Nama
-      data.telepon,          // Nomor Telepon
-      data.jumlahTamu,       // Jumlah Tamu
-      data.tanggal,          // Tanggal Reservasi
-      data.waktu,            // Waktu Reservasi
-      data.catatan || '-',   // Catatan Tambahan
-      timestamp              // Timestamp
+      no,
+      data.nama        || '-',
+      data.telepon     || '-',
+      data.produk      || '-',
+      data.jumlah      || '-',
+      data.alamat      || '-',
+      data.catatan     || '-',
+      timestamp
     ];
-    
-    // Tambahkan data ke spreadsheet
+
     sheet.appendRow(rowData);
-    
-    // Return success response
+
     return ContentService.createTextOutput(JSON.stringify({
       status: 'success',
-      message: 'Reservasi berhasil disimpan',
-      data: {
-        no: no,
-        nama: data.nama,
-        timestamp: timestamp
-      }
+      message: 'Pesanan berhasil disimpan'
     })).setMimeType(ContentService.MimeType.JSON);
-    
+
   } catch (error) {
-    // Return error response
     return ContentService.createTextOutput(JSON.stringify({
       status: 'error',
       message: error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-/**
- * Function untuk testing (opsional)
- * Bisa dijalankan dari Apps Script Editor untuk test
- */
-function testDoPost() {
-  const testData = {
-    postData: {
-      contents: JSON.stringify({
-        nama: "Test User",
-        telepon: "081234567890",
-        jumlahTamu: "4",
-        tanggal: "2026-03-10",
-        waktu: "19:00",
-        catatan: "Meja dekat jendela"
-      })
-    }
-  };
-  
-  const result = doPost(testData);
-  Logger.log(result.getContent());
 }
